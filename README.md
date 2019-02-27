@@ -1,27 +1,20 @@
-# Basta2019graph
+# Office Add-in with Microsoft Graph
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+In order to get that Office Add-in up and running, you've to setup an Azure AD Application Registration. 
 
-## Development server
+Provide the following settings:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Supported Account Types: Accounts in any organizational directory
+* Redirect URI: https://localhost:4200 or the https URI of your choice
+* API Permissions `User.Read` and `Files.Read` from *Microsoft Graph*
+* Enable `Authentication` -> `Implicit Grant`
 
-## Code scaffolding
+Grab the `Client ID` from the Azure AD App Registration you've just created and set it in
+`environment.aad.clientId` (see `environment.ts` and `environment.prod.ts`)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Either provide your own certificate or trust the developer cert for localhost.
 
-## Build
+Start the web app using `npm start`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Sideload the Office Add-in either using `office-toolbox` or manually as described on dev.office.com
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

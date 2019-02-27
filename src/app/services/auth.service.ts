@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private _authenticator: Authenticator;
-  private _token: string;
 
   public get hasToken(): boolean {
     return this._authenticator.tokens.get(DefaultEndpoints.Microsoft) &&
@@ -25,13 +24,13 @@ export class AuthService {
   }
 
   public signIn(): Observable<boolean> {
+    // wrap the promise based API to Observables ❤️
     return Observable.create(observer => {
+      // use the Authenticator from office-js-helpers to implement AuthN
+      // once authenticated, emit a true in the case of an error emit false
       this._authenticator
         .authenticate(DefaultEndpoints.Microsoft)
         .then(token => {
-          console.log('authenticated');
-          console.dir(token);
-          this._token = token.access_token;
           observer.next(true);
           observer.complete();
         })

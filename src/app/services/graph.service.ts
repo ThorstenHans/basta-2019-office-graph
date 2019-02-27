@@ -17,7 +17,6 @@ export class GraphService {
       authProvider: async done => {
         // Get the token from the auth service
         const token = this.authService.token;
-
         if (token) {
           done(null, token);
         } else {
@@ -42,8 +41,13 @@ export class GraphService {
   }
 
   public getFiles(query: string): Observable<Array<File>> {
+    // wrap the promise based API to Observables ❤️
     return Observable.create(observer => {
-
+      // use the graphClient to query the files api
+      // use select() to implement projection
+      // use orderby() to sort
+      // specify the HTTP Method using the corresponding method
+      // emit result's value
       this.graphClient
         .api(`/me/drive/root/search(q='${encodeURIComponent(query)}.pptx')`)
         .select('name,webUrl,lastModifiedBy')
