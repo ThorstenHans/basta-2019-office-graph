@@ -1,0 +1,26 @@
+<form [formGroup]="queryFormModel">
+  <div class="form-group row">
+    <label for="inputQuery" class="col-sm-1 offset-2 col-form-label">Query</label>
+
+    <div class="col-sm-6">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text" (click)="load()">⚡️</div>
+        </div>
+        <input type="text" class="form-control" id="inputQuery" name="query" formControlName="query" placeholder="Query" />
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="col-sm-4 offset-4">
+    <button class="btn btn-sm btn-secondary btn-block m-5" type="button" (click)="find()">Find Presentations</button>
+  </div>
+</div>
+<ul class="list-group m-3">
+  <li class="list-group-item" *ngFor="let f of files">
+    <a [attr.href]="f.webUrl" target="_blank"
+      >{{ f.name }} <small>({{ f.lastModifiedBy.user.displayName }})</small></a
+    >
+  </li>
+</ul>
